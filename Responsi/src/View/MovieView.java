@@ -31,6 +31,7 @@ public class MovieView extends javax.swing.JFrame implements ListenerMovie, Acti
         model = new MovieModel();
         model.setListenerMovie(this);
         control.setMovie(model);
+        control.lihat(this);       
     }
 
     /**
@@ -44,8 +45,6 @@ public class MovieView extends javax.swing.JFrame implements ListenerMovie, Acti
 
         panelHome = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelData = new javax.swing.JTable();
         panelForm = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -60,10 +59,11 @@ public class MovieView extends javax.swing.JFrame implements ListenerMovie, Acti
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Responsi Prak. PBO - Ryzal Fadhillah - 123200053 | Movie");
-        setPreferredSize(new java.awt.Dimension(700, 500));
         setResizable(false);
         setSize(new java.awt.Dimension(700, 500));
 
@@ -73,20 +73,6 @@ public class MovieView extends javax.swing.JFrame implements ListenerMovie, Acti
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("MOVIE");
-
-        tabelData.setBackground(new java.awt.Color(204, 204, 204));
-        tabelData.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Judul", "Alur", "Penokohan", "Akting", "Nilai"
-            }
-        ));
-        jScrollPane1.setViewportView(tabelData);
 
         panelForm.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -178,10 +164,20 @@ public class MovieView extends javax.swing.JFrame implements ListenerMovie, Acti
         btnUpdate.setBackground(new java.awt.Color(0, 102, 204));
         btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setBackground(new java.awt.Color(255, 0, 0));
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnClear.setBackground(new java.awt.Color(102, 102, 102));
         btnClear.setForeground(new java.awt.Color(255, 255, 255));
@@ -191,6 +187,24 @@ public class MovieView extends javax.swing.JFrame implements ListenerMovie, Acti
                 btnClearActionPerformed(evt);
             }
         });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout panelHomeLayout = new javax.swing.GroupLayout(panelHome);
         panelHome.setLayout(panelHomeLayout);
@@ -203,7 +217,7 @@ public class MovieView extends javax.swing.JFrame implements ListenerMovie, Acti
                         .addComponent(jLabel1))
                     .addGroup(panelHomeLayout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(panelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(panelForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -223,8 +237,8 @@ public class MovieView extends javax.swing.JFrame implements ListenerMovie, Acti
             .addGroup(panelHomeLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(panelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelHomeLayout.createSequentialGroup()
                         .addComponent(panelForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -235,8 +249,8 @@ public class MovieView extends javax.swing.JFrame implements ListenerMovie, Acti
                         .addGroup(panelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnClear)
                             .addComponent(btnDelete)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -263,6 +277,21 @@ public class MovieView extends javax.swing.JFrame implements ListenerMovie, Acti
         // TODO add your handling code here:
         control.tambah(this);
     }//GEN-LAST:event_btnTambahActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        control.update(this);
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        control.delete(this);
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        control.getData(this);
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -314,10 +343,10 @@ public class MovieView extends javax.swing.JFrame implements ListenerMovie, Acti
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JPanel panelForm;
     private javax.swing.JPanel panelHome;
-    private javax.swing.JTable tabelData;
     // End of variables declaration//GEN-END:variables
 
     public JTextField getfAkting() {
@@ -336,9 +365,13 @@ public class MovieView extends javax.swing.JFrame implements ListenerMovie, Acti
         return fPenokohan;
     }
 
-    public JTable getTabelData() {
-        return tabelData;
+    public JTable getjTable1() {
+        return jTable1;
     }
+    
+    
+    
+        
 
     @Override
     public void onChange(MovieModel movieModel) {
@@ -350,7 +383,7 @@ public class MovieView extends javax.swing.JFrame implements ListenerMovie, Acti
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+
     }
 
 
