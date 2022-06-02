@@ -12,7 +12,7 @@ import java.sql.*;
  */
 
 public class Koneksi {
-    String DBurl = "jdbc:mysql://localhost/rentloyo";
+    String DBurl = "jdbc:mysql://localhost/movie_db";
     String DBusername = "root";
     String DBpassword = "";
     

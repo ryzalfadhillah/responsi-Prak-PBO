@@ -101,6 +101,10 @@ public class MovieModel {
         setAkting("");
     }
     
+    public void lihat(MovieView){
+    
+    }
+    
     public void tambah(MovieView view){
         try{
             String vjudul = view.getfJudul().getText();
@@ -108,13 +112,15 @@ public class MovieModel {
             String vpenokohan = view.getfPenokohan().getText();
             String vakting = view.getfAkting().getText();
             double vnilai = getNilai(view); 
-                        
+                                    
             String query = "INSERT INTO `movie`(`judul`, `alur`, `penokohan`, `akting`, `nilai`) " + "VALUES ('" 
                     + vjudul + "', '" + valur + "', '" + vpenokohan + 
                     "', '" + vakting + "', '" + vnilai + "')";
             
             conn.statement = conn.connection.createStatement();
-            conn.statement.executeQuery(query);
+            conn.statement.execute(query);
+            
+            JOptionPane.showMessageDialog(view, "Berhasil menambahkan penilaian");
             
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
